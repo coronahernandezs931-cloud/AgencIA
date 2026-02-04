@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo de Soluciones IA | AI Nexus Agency</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#256af4",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-header {
+            background: rgba(16, 22, 34, 0.8);
+            backdrop-filter: blur(12px);
+        }
+        
+        /* Animaciones personalizadas mejoradas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
+        }
+        
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(37, 106, 244, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(37, 106, 244, 0.8), 0 0 30px rgba(37, 106, 244, 0.6);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInLeft {
+            animation: fadeInLeft 0.8s ease-out forwards;
+        }
+        
+        .animate-fadeInRight {
+            animation: fadeInRight 0.8s ease-out forwards;
+        }
+        
+        .animate-scaleIn {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-gradient {
+            background: linear-gradient(-45deg, #256af4, #00f2ff, #256af4, #00f2ff);
+            background-size: 400% 400%;
+            animation: gradient 6s ease infinite;
+        }
+        
+        .animate-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        .animate-slideInFromTop {
+            animation: slideInFromTop 0.6s ease-out forwards;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        .animate-delay-600 {
+            animation-delay: 0.6s;
+        }
+        
+        .animate-delay-800 {
+            animation-delay: 0.8s;
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(37, 106, 244, 0.3);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #256af4, #00f2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(37, 106, 244, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .glow-effect:hover {
+            box-shadow: 0 0 30px rgba(37, 106, 244, 0.8);
+        }
+        
+        .neural-bg {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(37, 106, 244, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(37, 106, 244, 0.05) 0%, transparent 50%);
+        }
+        
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0.5;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tech-grid {
+            background-image: 
+                linear-gradient(rgba(37, 106, 244, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 106, 244, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .magnetic-button {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .magnetic-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .parallax-slow {
+            transition: transform 0.5s ease-out;
+        }
+        
+        .card-hover-3d {
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .card-hover-3d:hover {
+            transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<header class="sticky top-0 z-50 glass-header border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">query_stats</span>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight">AI Nexus</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="index.html">Inicio</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="Second_Page.html">Catálogo</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="info.html">Panel</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="moreI.html">Consulta</a>
+<a href="moreI.html" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                    Contáctanos
+                </a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-primary w-64 text-slate-900 dark:text-white placeholder:text-slate-500" placeholder="Buscar herramientas IA..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                        Contáctanos
+                    </button>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<section class="mb-16 relative overflow-hidden neural-bg">
+<!-- Partículas flotantes -->
+<div class="particle top-10 left-10 w-2 h-2 bg-primary rounded-full animate-float" style="animation-delay: 0s;"></div>
+<div class="particle top-20 right-20 w-3 h-3 bg-blue-400 rounded-full animate-float" style="animation-delay: 1s;"></div>
+<div class="particle bottom-20 left-20 w-2 h-2 bg-cyan-400 rounded-full animate-float" style="animation-delay: 2s;"></div>
+
+<!-- Grid tecnológico de fondo -->
+<div class="absolute inset-0 tech-grid opacity-20"></div>
+
+<div class="grid lg:grid-cols-2 gap-12 items-center relative z-10">
+<div class="flex flex-col gap-6 animate-fadeInLeft">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest border border-primary/20 w-fit animate-pulse-slow animate-shimmer">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+                        Enterprise Suite 2024
+                    </div>
+<h1 class="text-4xl md:text-6xl font-bold leading-[1.1] text-slate-900 dark:text-white tracking-tight">
+                        Inteligencia de <span class="text-primary text-gradient animate-gradient">Nueva Generación</span> para Empresas Modernas
+                    </h1>
+<p class="text-lg text-slate-600 dark:text-slate-400 max-w-xl font-light">
+                        Implemente automatización personalizada, modelos predictivos e IA conversacional a escala. Transforme datos brutos en ventajas competitivas con nuestro catálogo especializado.
+                    </p>
+<div class="flex flex-wrap gap-4 mt-4">
+<button class="bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg hover:translate-y-[-2px] transition-all flex items-center gap-2 magnetic-button animate-glow">
+                            Explorar Catálogo <span class="material-symbols-outlined">arrow_downward</span>
+</button>
+<button class="bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-slate-300 dark:hover:bg-slate-700 transition-all magnetic-button">
+                            Ver Especificaciones API
+                        </button>
+</div>
+</div>
+<div class="relative group animate-fadeInRight parallax-slow">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-blue-600 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+<div class="relative aspect-video rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 card-hover-3d" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCi3AAoiCcYxPpO3Jorfk3uctJGUbjKsiqRS8YTDL8dS2m7oipiVc1d9usjNMkBODVxByvLTgeYKDYreVz73rwnymuwKWRTyprqQsFfsIVrx4YzMv_ih_ocFWbUwLuRI-ThXW3k5Zz-AGjFypiFtITPwmA4C6bp6Xyw8BC9NpIwtK7wAOx300gg0jH8_bVSSXzGr1s2KpdcJGttPjtQkpkGh7P1l0Gn4Tj4fPXk-WNLXFYnzsOs5vTSRJMKXqVkRrfdjeCKB3ECk677'); background-size: cover; background-position: center;">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent"></div>
+<!-- Overlay interactivo -->
+<div class="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</div>
+</div>
+</div>
+</section>
+<section id="catalog">
+<h2 class="text-3xl font-bold mb-10 text-slate-900 dark:text-white">Catálogo de Soluciones IA</h2>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                    <span class="text-sm">Aprendizaje Continuo</span>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-24 mb-12">
+<div class="bg-gradient-to-br from-primary to-blue-700 rounded-3xl p-10 md:p-16 text-center text-white relative overflow-hidden">
+<div class="absolute top-0 right-0 -mt-10 -mr-10 opacity-10">
+<span class="material-symbols-outlined text-[300px]">auto_awesome</span>
+</div>
+<h2 class="text-3xl md:text-5xl font-bold mb-6">¿Listo para Escalar su Inteligencia?</h2>
+<p class="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+                    Únase a más de 200 empresas globales que aprovechan Nexus AI para impulsar la eficiencia y desbloquear nuevas fuentes de ingresos.
+                </p>
+<div class="flex flex-wrap justify-center gap-6">
+<a href="moreI.html" class="bg-white text-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-slate-100 transition-colors">
+                        Agendar Llamada Estratégica
+                    </a>
+<a href="info.html" class="bg-primary-dark/30 border border-white/30 backdrop-blur-sm text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-colors">
+                        Ver Panel de Demo
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-slate-200 dark:border-slate-800 py-12">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 text-primary opacity-50 grayscale hover:grayscale-0 transition-all cursor-default">
+<span class="material-symbols-outlined text-2xl font-bold">query_stats</span>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">AI Nexus</h2>
+</div>
+<div class="flex gap-8 text-slate-500 dark:text-slate-400 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Términos de Servicio</a>
+<a class="hover:text-primary transition-colors" href="#">Política de Privacidad</a>
+<a class="hover:text-primary transition-colors" href="#">Cumplimiento</a>
+<a class="hover:text-primary transition-colors" href="#">Estado del Sistema</a>
+</div>
+<div class="text-slate-400 dark:text-slate-500 text-xs">
+                    2024 AI Nexus Agency. Diseñado para la empresa moderna.
+                </div>
+</div>
+</div>
+</footer>
+
+<script>
+// Efectos interactivos avanzados para el catálogo
+document.addEventListener('DOMContentLoaded', function() {
+    // Efecto de partículas interactivas
+    const particles = document.querySelectorAll('.particle');
+    
+    // Animación de scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Efecto parallax en scroll
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.parallax-slow');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+
+        // Animación de partículas en scroll
+        particles.forEach((particle, index) => {
+            const speed = 0.2 + (index * 0.1);
+            particle.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // Efecto magnético en botones
+    const magneticButtons = document.querySelectorAll('.magnetic-button');
+    
+    magneticButtons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
+        });
+        
+        button.addEventListener('mouseleave', () => {
+            button.style.transform = 'translate(0, 0) scale(1)';
+        });
+    });
+
+    // Animación de entrada al viewport
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observar elementos con animación
+    document.querySelectorAll('.animate-fadeInUp, .animate-fadeInLeft, .animate-fadeInRight, .animate-scaleIn').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease-out';
+        observer.observe(el);
+    });
+
+    // Efecto hover mejorado en tarjetas de catálogo
+    const catalogCards = document.querySelectorAll('.group');
+    
+    catalogCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-10px) scale(1.02)';
+            card.style.boxShadow = '0 30px 60px rgba(37, 106, 244, 0.4)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0) scale(1)';
+            card.style.boxShadow = '';
+        });
+    });
+
+    // Filtro de búsqueda interactivo
+    const searchInput = document.querySelector('input[placeholder*="Buscar"]');
+    const filterButtons = document.querySelectorAll('.flex.border-b a');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            catalogCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.opacity = '0.3';
+                    card.style.transform = 'scale(0.95)';
+                }
+            });
+        });
+    }
+
+    // Filtrado por categorías
+    filterButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Actualizar botón activo
+            filterButtons.forEach(btn => {
+                btn.classList.remove('border-primary', 'text-primary');
+                btn.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+            });
+            
+            button.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+            button.classList.add('border-primary', 'text-primary');
+            
+            // Filtrar tarjetas (simulado)
+            const category = button.textContent.trim();
+            catalogCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }, index * 100);
+            });
+        });
+    });
+
+    // Contador animado para servicios
+    const serviceCount = document.querySelector('.text-slate-900.dark\\:text-white.font-bold');
+    if (serviceCount && serviceCount.textContent.includes('12')) {
+        let count = 0;
+        const targetCount = 12;
+        const increment = targetCount / 50;
+        
+        const updateCount = () => {
+            if (count < targetCount) {
+                count += increment;
+                serviceCount.textContent = `Mostrando <span class="text-slate-900 dark:text-white font-bold">${Math.floor(count)}</span> servicios especializados`;
+                requestAnimationFrame(updateCount);
+            }
+        };
+        
+        // Iniciar contador cuando sea visible
+        const countObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                updateCount();
+                countObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+        
+        countObserver.observe(serviceCount);
+    }
+
+    // Efecto de hover en tags de características
+    const featureTags = document.querySelectorAll('.bg-slate-200.dark\\:bg-slate-800');
+    
+    featureTags.forEach(tag => {
+        tag.addEventListener('mouseenter', () => {
+            tag.style.backgroundColor = 'rgba(37, 106, 244, 0.1)';
+            tag.style.borderColor = 'rgba(37, 106, 244, 0.3)';
+        });
+        
+        tag.addEventListener('mouseleave', () => {
+            tag.style.backgroundColor = '';
+            tag.style.borderColor = '';
+        });
+    });
+
+    console.log(' AI Nexus Catalog - Interacciones cargadas exitosamente');
+});
+</script>
+
+</body></html>
+
+<!-- Sección de Comparación de Servicios -->
+<section class="py-20 bg-slate-50 dark:bg-background-dark relative overflow-hidden">
+    <div class="absolute inset-0 neural-bg opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black mb-4 text-gradient animate-gradient">Comparador de Servicios IA</h2>
+            <p class="text-slate-600 dark:text-[#90a4cb] text-lg">Compare nuestras soluciones y encuentre la perfecta para su negocio</p>
+        </div>
+
+        <!-- Tabla de Comparación -->
+        <div class="overflow-x-auto">
+            <table class="w-full glass-morphism rounded-2xl overflow-hidden">
+                <thead>
+                    <tr class="bg-primary/10 border-b border-primary/20">
+                        <th class="px-6 py-4 text-left text-sm font-bold text-primary">Característica</th>
+                        <th class="px-6 py-4 text-center text-sm font-bold text-primary">Bots de IA</th>
+                        <th class="px-6 py-4 text-center text-sm font-bold text-primary">Aplicaciones IA</th>
+                        <th class="px-6 py-4 text-center text-sm font-bold text-primary">Automatización</th>
+                        <th class="px-6 py-4 text-center text-sm font-bold text-primary">Influencer IA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Precio Base</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-2xl font-bold text-primary">$500</span>
+                            <span class="text-sm text-slate-500">/mes</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-2xl font-bold text-primary">$1,000</span>
+                            <span class="text-sm text-slate-500">/mes</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-2xl font-bold text-primary">$1,500</span>
+                            <span class="text-sm text-slate-500">/mes</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-2xl font-bold text-primary">$3,000</span>
+                            <span class="text-sm text-slate-500">/mes</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Tiempo de Implementación</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold rounded-full">2-3 semanas</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-xs font-bold rounded-full">4-6 semanas</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold rounded-full">3-5 semanas</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full">6-8 semanas</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Soporte 24/7</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Integración API</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                    </tr>
+                    <tr class="border-b border-slate-200 dark:border-slate-700 hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Machine Learning</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-yellow-500">remove_circle</span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-white/5 dark:hover:bg-white/5 transition-all">
+                        <td class="px-6 py-4 font-medium">Multi-idioma</td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="flex flex-wrap gap-4 justify-center mt-8">
+            <button class="px-6 py-3 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-all magnetic-button">
+                <span class="material-symbols-outlined">download</span>
+                Descargar Comparación
+            </button>
+            <button class="px-6 py-3 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg font-bold hover:bg-slate-200 dark:hover:bg-slate-700 transition-all magnetic-button">
+                <span class="material-symbols-outlined">share</span>
+                Compartir
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Casos de Uso -->
+<section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 neural-bg opacity-20"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black mb-4 text-gradient animate-gradient">Casos de Uso por Industria</h2>
+            <p class="text-slate-600 dark:text-[#90a4cb] text-lg">Descubra cómo nuestras soluciones IA transforman diferentes sectores</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Caso 1 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-200">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">shopping_cart</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Retail y E-commerce</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Chatbots para atención al cliente, recomendaciones personalizadas y automatización de inventario</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+35% en conversión</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">schedule</span>
+                        <span class="text-sm font-medium">-50% tiempo respuesta</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">savings</span>
+                        <span class="text-sm font-medium">-40% costos operativos</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full">Bots IA</span>
+                    <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold rounded-full">Analytics</span>
+                </div>
+            </div>
+
+            <!-- Caso 2 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-400">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">account_balance</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Finanzas y Banca</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Análisis de riesgo, detección de fraude y automatización de procesos de aprobación</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+60% precisión</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">security</span>
+                        <span class="text-sm font-medium">-85% fraudes</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">speed</span>
+                        <span class="text-sm font-medium">-70% procesamiento</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-xs font-bold rounded-full">ML</span>
+                    <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full">RPA</span>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-600">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">medical_services</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Salud y Farmacia</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Diagnóstico asistido, gestión de citas y análisis de datos médicos en tiempo real</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+45% precisión</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">event_available</span>
+                        <span class="text-sm font-medium">-30% no-shows</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">healing</span>
+                        <span class="text-sm font-medium">+25% recuperación</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 text-xs font-bold rounded-full">NLP</span>
+                    <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-xs font-bold rounded-full">Computer Vision</span>
+                </div>
+            </div>
+
+            <!-- Caso 4 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-800">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">factory</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Manufactura</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Control de calidad predictivo, mantenimiento predictivo y optimización de la cadena de suministro</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+55% eficiencia</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">build</span>
+                        <span class="text-sm font-medium">-30% defectos</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">inventory</span>
+                        <span class="text-sm font-medium">-25% inventario</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-xs font-bold rounded-full">IoT</span>
+                    <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-xs font-bold rounded-full">Predictive</span>
+                </div>
+            </div>
+
+            <!-- Caso 5 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-200">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">school</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Educación</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Tutores personalizados, evaluación automatizada y análisis de rendimiento estudiantil</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+40% engagement</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">psychology</span>
+                        <span class="text-sm font-medium">+30% retención</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">auto_stories</span>
+                        <span class="text-sm font-medium">-60% tiempo calificación</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-xs font-bold rounded-full">LMS</span>
+                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full">AI Tutor</span>
+                </div>
+            </div>
+
+            <!-- Caso 6 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-400">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">campaign</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3">Marketing Digital</h3>
+                <p class="text-slate-600 dark:text-[#90a4cb] mb-6">Creación de contenido IA, análisis de campañas y optimización de conversión</p>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+                        <span class="text-sm font-medium">+50% ROI</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">visibility</span>
+                        <span class="text-sm font-medium">+35% alcance</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-sounds-outlined text-primary text-lg">analytics</span>
+                        <span class="text-sm font-medium">+25% CTR</span>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-xs font-bold rounded-full">Content AI</span>
+                    <span class="px-3 py-1 bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 text-xs font-bold rounded-full">Influencer IA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Estadísticas Avanzadas -->
+<section class="py-20 bg-slate-50 dark:bg-background-dark relative overflow-hidden">
+    <div class="absolute inset-0 neural-bg opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black mb-4 text-gradient animate-gradient">Impacto Global</h2>
+            <p class="text-slate-600 dark:text-[#90a4cb] text-lg">Estadísticas en tiempo real de nuestra plataforma</p>
+        </div>
+
+        <!-- Dashboard de Estadísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass-morphism rounded-2xl p-6 text-center hover-lift animate-fadeInUp animate-delay-200">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">analytics</span>
+                </div>
+                <div class="text-3xl font-bold text-primary mb-2 counter" data-target="2847">0</div>
+                <p class="text-slate-600 dark:text-[#90a4cb] text-sm">Usuarios Activos</p>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-primary to-cyan-400 h-full rounded-full progress-bar" style="width: 75%;"></div>
+                </div>
+            </div>
+
+            <div class="glass-morphism rounded-2xl p-6 text-center hover-lift animate-fadeInUp animate-delay-400">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">rocket_launch</span>
+                </div>
+                <div class="text-3xl font-bold text-primary mb-2 counter" data-target="15623">0</div>
+                <p class="text-slate-600 dark:text-[#90a4cb] text-sm">Proyectos Completados</p>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-green-500 to-teal-400 h-full rounded-full progress-bar" style="width: 82%;"></div>
+                </div>
+            </div>
+
+            <div class="glass-morphism rounded-2xl p-6 text-center hover-lift animate-fadeInUp animate-delay-600">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">api</span>
+                </div>
+                <div class="text-3xl font-bold text-primary mb-2 counter" data-target="987654">0</div>
+                <p class="text-slate-600 dark:text-[#90a4cb] text-sm">API Calls/Día</p>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-orange-500 to-red-400 h-full rounded-full progress-bar" style="width: 91%;"></div>
+                </div>
+            </div>
+
+            <div class="glass-morphism rounded-2xl p-6 text-center hover-lift animate-fadeInUp animate-delay-800">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-600 flex items-center justify-center mx-auto mb-4 animate-pulse-slow">
+                    <span class="material-symbols-outlined text-white text-2xl">psychology</span>
+                </div>
+                <div class="text-3xl font-bold text-primary mb-2 counter" data-target="99.7">0%</div>
+                <p class="text-slate-600 dark:text-[#90a4cb] text-sm">Satisfacción</p>
+                <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-pink-500 to-rose-400 h-full rounded-full progress-bar" style="width: 99.7%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapa de Actividad Global -->
+        <div class="mt-16 glass-morphism rounded-2xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Actividad Global en Tiempo Real</h3>
+            <div class="h-64 bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden relative">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-slate-500 dark:text-slate-400">
+                        <div class="text-2xl font-bold mb-2">🌍</div>
+                        <p class="text-sm">Mapa de usuarios activos</p>
+                    </div>
+                </div>
+                <!-- Simulación de puntos de actividad -->
+                <div class="absolute top-4 left-4 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+                <div class="absolute top-1/4 left-1/4 w-3 h-3 bg-cyan-400 rounded-full animate-float" style="animation-delay: 1s;"></div>
+                <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-green-400 rounded-full animate-float" style="animation-delay: 2s;"></div>
+                <div class="absolute bottom-1/4 left-1/3 w-4 h-4 bg-yellow-400 rounded-full animate-float" style="animation-delay: 3s;"></div>
+                <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-orange-400 rounded-full animate-float" style="animation-delay: 4s;"></div>
+                <div class="absolute bottom-1/3 right-1/3 w-2 h-2 bg-pink-400 rounded-full animate-float" style="animation-delay: 5s;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección de Testimonios Mejorada -->
+<section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 neural-bg opacity-30"></div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-black mb-4 text-gradient animate-gradient">Testimonios de Clientes</h2>
+            <p class="text-slate-600 dark:text-[#90a4cb] text-lg">Lo que dicen nuestros clientes sobre nuestras soluciones IA</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonio 1 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-200">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg mr-4">
+                        <span>JD</span>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 dark:text-white font-bold">Juan Díaz</h4>
+                        <p class="text-slate-400 text-sm">CEO, TechCorp</p>
+                    </div>
+                </div>
+                <div class="flex mb-4">
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed group-hover:text-white transition-colors duration-300">
+                    "La implementación de IA redujo nuestros costos operativos en un 40%. El retorno de inversión fue visible en solo 3 meses."
+                </p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xs text-slate-500">Hace 3 meses</span>
+                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Ver caso completo</span>
+                </div>
+            </div>
+
+            <!-- Testimonio 2 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-400">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg mr-4">
+                        <span>MG</span>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 dark:text-white font-bold">María García</h4>
+                        <p class="text-slate-400 text-sm">Directora, GlobalTrade</p>
+                    </div>
+                </div>
+                <div class="flex mb-4">
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed group-hover:text-white transition-colors duration-300">
+                    "El sistema de análisis predictivo nos ha permitido anticipar tendencias del mercado con una precisión asombrosa."
+                </p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xs text-slate-500">Hace 6 meses</span>
+                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Ver caso completo</span>
+                </div>
+            </div>
+
+            <!-- Testimonio 3 -->
+            <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-600">
+                <div class="flex items-center mb-6">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-white font-bold text-lg mr-4">
+                        <span>CR</span>
+                    </div>
+                    <div>
+                        <h4 class="text-slate-900 dark:text-white font-bold">Carlos Rodríguez</h4>
+                        <p class="text-slate-400 text-sm">CTO, DataFlow</p>
+                    </div>
+                </div>
+                <div class="flex mb-4">
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                    <span class="material-symbols-outlined text-yellow-400">star</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed group-hover:text-white transition-colors duration-300">
+                    "La automatización inteligente transformó completamente nuestros flujos de trabajo. Productividad aumentada en 60%."
+                </p>
+                <div class="flex items-center justify-between mt-4">
+                    <span class="text-xs text-slate-500">Hace 8 meses</span>
+                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Ver caso completo</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas de Testimonios -->
+        <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="animate-fadeInUp">
+                <div class="text-4xl font-bold text-primary mb-2 counter" data-target="500">0</div>
+                <p class="text-slate-600 dark:text-[#90a4cb]">Clientes Satisfechos</p>
+            </div>
+            <div class="animate-fadeInUp animate-delay-200">
+                <div class="text-4xl font-bold text-primary mb-2 counter" data-target="4.9">0</div>
+                <p class="text-slate-600 dark:text-[#90a4cb]">Rating Promedio</p>
+            </div>
+            <div class="animate-fadeInUp animate-delay-400">
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Sistema de comparación de servicios
+        const comparisonTable = document.querySelector('table');
+        if (comparisonTable) {
+            const rows = comparisonTable.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(20px)';
+                row.style.transition = 'all 0.6s ease-out';
+                setTimeout(() => {
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+            
+            // Efecto hover en filas
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.style.backgroundColor = 'rgba(37, 106, 244, 0.05)';
+                    row.style.transform = 'scale(1.02)';
+                });
+                
+                row.addEventListener('mouseleave', () => {
+                    row.style.backgroundColor = '';
+                    row.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Sistema de casos de uso interactivo
+        const useCaseCards = document.querySelectorAll('.glass-morphism.rounded-2xl.p-8');
+        
+        useCaseCards.forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `perspective(1000px) rotateY(${(x - rect.width / 2) / 20}deg) rotateX(${-(y - rect.height / 2) / 20}deg) translateY(-10px)`;
+                card.style.boxShadow = '0 30px 60px rgba(37, 106, 244, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateY(0) rotateX(0) translateY(0)';
+                card.style.boxShadow = '';
+            });
+            
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.transform = `perspective(1000px) rotateY(${(x - rect.width / 2) / 20}deg) rotateX(${-(y - rect.height / 2) / 20}deg) translateY(-10px)`;
+            });
+        });
+
+        // Contadores animados para estadísticas avanzadas
+        const advancedCounters = document.querySelectorAll('.counter');
+        const advancedCounterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                    const target = parseFloat(entry.target.dataset.target);
+                    const isPercentage = entry.target.textContent.includes('%');
+                    const duration = 2000;
+                    const increment = target / (duration / 16);
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            entry.target.textContent = Math.floor(current).toLocaleString() + (isPercentage ? '%' : '');
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            entry.target.textContent = target.toLocaleString() + (isPercentage ? '%' : '');
+                            entry.target.classList.add('counted');
+                        }
+                    };
+                    
+                    updateCounter();
+                    advancedCounterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        advancedCounters.forEach(counter => advancedCounterObserver.observe(counter));
+
+        // Animación de barras de progreso
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetWidth = entry.target.style.width;
+                    entry.target.style.width = '0%';
+                    
+                    setTimeout(() => {
+                        entry.target.style.width = targetWidth;
+                    }, 200);
+                    
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+
+        // Sistema de testimonios mejorado
+        const testimonialCards = document.querySelectorAll('.glass-morphism.rounded-2xl.p-8');
+        
+        testimonialCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease-out';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 200);
+            
+            // Efecto hover en testimonios
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+                card.style.boxShadow = '0 30px 60px rgba(37, 106, 244, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Sistema de descarga y compartir
+        const downloadBtn = document.querySelector('button:has(.material-symbols-outlined[download])');
+        const shareBtn = document.querySelector('button:has(.material-symbols-outlined[share])');
+        
+        if (downloadBtn) {
+            downloadBtn.addEventListener('click', () => {
+                downloadBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">loading</span> Generando...';
+                downloadBtn.disabled = true;
+                
+                setTimeout(() => {
+                    downloadBtn.innerHTML = '<span class="material-symbols-outlined">download</span> Descargar Comparación';
+                    downloadBtn.disabled = false;
+                    showNotification('Comparación descargada exitosamente', 'success');
+                }, 2000);
+            });
+        }
+        
+        if (shareBtn) {
+            shareBtn.addEventListener('click', () => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Comparación de Servicios IA',
+                        text: 'Descubre nuestras soluciones de IA',
+                        url: window.location.href
+                    });
+                } else {
+                    showNotification('Enlace copiado al portapapeles', 'success');
+                }
+            });
+        }
+
+        // Función de notificaciones (reutilizable)
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-xl animate-scaleIn z-50 ${
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
+                type === 'warning' ? 'bg-yellow-500 text-white' :
+                'bg-primary text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">
+                        ${type === 'success' ? 'check_circle' : 
+                          type === 'error' ? 'error' : 
+                          type === 'warning' ? 'warning' : 'info'}
+                    </span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Efecto de onda en click para todos los botones
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('button')) {
+                const button = e.target.closest('button');
+                const rect = button.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                
+                ripple.style.position = 'absolute';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.transform = 'translate(-50%, -50%)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                button.style.position = 'relative';
+                button.style.overflow = 'hidden';
+                button.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+
+        // Agregar animación ripple al CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    width: 200px;
+                    height: 200px;
+                    opacity: 0;
+                }
+            }
+            .animate-spin {
+                animation: spin 1s linear infinite;
+            }
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Sistema de búsqueda global (Ctrl+K)
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                showGlobalSearch();
+            }
+        });
+
+        function showGlobalSearch() {
+            const searchModal = document.createElement('div');
+            searchModal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn';
+            searchModal.innerHTML = `
+                <div class="bg-white dark:bg-[#1a2333] rounded-2xl p-6 w-full max-w-2xl mx-4 animate-scaleIn">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="material-symbols-outlined text-2xl text-primary">search</span>
+                        <input type="text" placeholder="Buscar servicios, casos de uso..." 
+                               class="flex-1 text-lg outline-none bg-transparent dark:text-white"
+                               id="globalSearchInput">
+                        <button onclick="this.closest('.fixed').remove()" 
+                                class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+                    <div class="border-t border-slate-200 dark:border-slate-700 pt-4">
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-2">Sugerencias:</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm cursor-pointer hover:bg-primary hover:text-white transition-all">Bots IA</span>
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm cursor-pointer hover:bg-primary hover:text-white transition-all">Automatización</span>
+                            <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg text-sm cursor-pointer hover:bg-primary hover:text-white transition-all">Casos de uso</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(searchModal);
+            
+            // Enfocar input automáticamente
+            setTimeout(() => {
+                document.getElementById('globalSearchInput').focus();
+            }, 100);
+            
+            // Cerrar con Escape
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    searchModal.remove();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            };
+            document.addEventListener('keydown', handleEscape);
+            
+            // Cerrar al hacer clic fuera
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) {
+                    searchModal.remove();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            });
+        }
+
+        // Indicador de progreso de lectura
+        const progressBar = document.createElement('div');
+        progressBar.className = 'fixed top-0 left-0 h-1 bg-primary z-50 transition-all duration-300';
+        progressBar.style.width = '0%';
+        document.body.appendChild(progressBar);
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const height = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrolled / height) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        console.log('🚀 AI Nexus Catalog - Interacciones avanzadas cargadas exitosamente');
+    });
+</script>
+
+</body></html>
