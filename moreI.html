@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="dark" lang="es"><head>
+<html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Formulario de Consulta IA | Agencia de IA</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -26,6 +26,10 @@
         }
     </script>
 <style type="text/tailwindcss">
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Space Grotesk', sans-serif;
         }
@@ -395,9 +399,117 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        #appLoader {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 40%, rgba(37, 106, 244, 0.16), transparent 45%),
+                rgba(16, 22, 34, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 1;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #appLoader.is-hidden {
+            opacity: 0;
+            transform: scale(1.02);
+            pointer-events: none;
+        }
+
+        #appLoaderCard {
+            width: min(560px, 100%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(24, 34, 52, 0.48);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+            padding: 28px;
+        }
+
+        #loaderRing {
+            width: 110px;
+            height: 110px;
+            border-radius: 9999px;
+            border: 2px solid rgba(255, 255, 255, 0.10);
+            border-top-color: rgba(0, 242, 255, 0.9);
+            border-right-color: rgba(37, 106, 244, 0.9);
+            animation: rotate 1.2s linear infinite;
+            box-shadow: 0 0 26px rgba(37, 106, 244, 0.25);
+        }
+
+        #loaderBarOuter {
+            width: 100%;
+            height: 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        #loaderBar {
+            height: 100%;
+            width: 40%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, rgba(37, 106, 244, 1), rgba(0, 242, 255, 1));
+            background-size: 200% 100%;
+            animation: shimmer 1.2s linear infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            #appLoader { display: none; }
+            #pageTransition { display: none; }
+        }
+
+        #pageTransition {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 40%, rgba(37, 106, 244, 0.16), transparent 45%),
+                rgba(16, 22, 34, 0.88);
+            backdrop-filter: blur(8px);
+        }
+
+        #pageTransition.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col">
+<div id="appLoader" aria-hidden="true">
+<div id="appLoaderCard" class="glass-morphism">
+<div class="flex items-center justify-between gap-6 mb-6">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">contact_form</span>
+</div>
+<div class="flex flex-col">
+<p class="text-white text-lg font-bold leading-none">Consulta IA</p>
+<p class="text-white/60 text-xs font-bold uppercase tracking-widest">Preparando Formulario</p>
+</div>
+</div>
+<div id="loaderRing" aria-hidden="true"></div>
+</div>
+<p class="text-white/80 text-sm leading-relaxed mb-6">Cargando módulos de validación e interacciones.</p>
+<div id="loaderBarOuter" aria-hidden="true"><div id="loaderBar"></div></div>
+<div class="flex items-center justify-between mt-4">
+<p class="text-white/50 text-xs">Envío rápido y seguro</p>
+<p id="loaderPct" class="text-cyan-300 text-xs font-bold">0%</p>
+</div>
+</div>
+</div>
+<div id="pageTransition" aria-hidden="true"></div>
 <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#222f49] px-6 md:px-20 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
 <div class="flex items-center gap-4">
 <div class="size-8 text-primary">
@@ -419,6 +531,9 @@
 <a class="text-sm font-medium hover:text-primary transition-colors" href="info.html">Panel</a>
 <a class="text-sm font-medium hover:text-primary transition-colors" href="moreI.html">Consulta</a>
 </nav>
+<button id="themeToggle" type="button" class="flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 dark:border-[#2d3b59] bg-white/60 dark:bg-white/5 hover:bg-white/80 dark:hover:bg-white/10 transition-all" aria-label="Cambiar tema">
+<span id="themeIcon" class="material-symbols-outlined text-xl">dark_mode</span>
+</button>
 <button class="flex min-w-[150px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold transition-all hover:opacity-90 active:scale-95">
                 Guardar Borrador
             </button>
@@ -447,10 +562,28 @@
 <div class="h-full rounded-full progress-bar" style="width: 50%;"></div>
 </div>
 </div>
-<div class="glass-morphism border border-white/10 rounded-2xl p-8 md:p-12 shadow-xl card-hover-3d animate-scaleIn animate-delay-600">
+<form id="contactForm" class="glass-morphism border border-white/10 rounded-2xl p-8 md:p-12 shadow-xl card-hover-3d animate-scaleIn animate-delay-600" novalidate>
+<input type="hidden" name="_subject" value="Nueva consulta desde el sitio" />
+<input type="hidden" name="_captcha" value="false" />
+<input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" />
+<input type="hidden" name="challenges" id="selectedChallenges" value="" />
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+<div class="relative">
+<input id="leadName" name="name" type="text" class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-white" placeholder=" " required />
+<label for="leadName" class="floating-label absolute left-4 top-4 text-slate-500 dark:text-[#90a4cb] text-sm font-medium pointer-events-none">Nombre</label>
+</div>
+<div class="relative">
+<input id="leadEmail" name="email" type="email" class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-white" placeholder=" " required />
+<label for="leadEmail" class="floating-label absolute left-4 top-4 text-slate-500 dark:text-[#90a4cb] text-sm font-medium pointer-events-none">Email</label>
+</div>
+<div class="relative">
+<input id="leadPhone" name="phone" type="tel" class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-white" placeholder=" " />
+<label for="leadPhone" class="floating-label absolute left-4 top-4 text-slate-500 dark:text-[#90a4cb] text-sm font-medium pointer-events-none">Teléfono (opcional)</label>
+</div>
+</div>
 <div class="mb-10">
 <label class="block text-xl md:text-2xl font-bold mb-4 font-display">¿A qué industria pertenece su empresa?</label>
-<select class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-white">
+<select id="industry" name="industry" class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none text-slate-900 dark:text-white" required>
 <option disabled="" selected="" value="">Seleccione una opción</option>
 <option value="tech">Tecnología y Software</option>
 <option value="finance">Finanzas y Banca</option>
@@ -460,6 +593,7 @@
 <option value="other">Otra</option>
 </select>
 </div>
+
 <div class="mb-10 text-center animate-fadeInUp animate-delay-800">
 <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-4 font-display">¿Cuáles son sus principales desafíos?</h1>
 <p class="text-slate-500 dark:text-[#90a4cb] max-w-md mx-auto">Seleccione los obstáculos que enfrenta su equipo. Esto nos ayuda a personalizar su estrategia de IA.</p>
@@ -557,25 +691,25 @@
 </div>
 <div class="mt-10 animate-fadeInUp">
 <label class="block text-xl md:text-2xl font-bold mb-4 font-display">Objetivos principales</label>
-<textarea class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none min-h-[120px] text-slate-900 dark:text-white" placeholder="Describa los resultados que espera alcanzar con soluciones de IA..."></textarea>
+<textarea id="objectives" name="objectives" class="w-full form-input rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary focus:border-transparent outline-none min-h-[120px] text-slate-900 dark:text-white" placeholder="Describa los resultados que espera alcanzar con soluciones de IA..." required></textarea>
 </div>
 <div class="mt-12 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-[#2d3b59] pt-8 animate-fadeInUp">
-<button class="flex items-center gap-2 px-6 h-12 rounded-lg font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all magnetic-button">
+<button type="button" class="flex items-center gap-2 px-6 h-12 rounded-lg font-bold text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all magnetic-button">
 <span class="material-symbols-outlined">arrow_back</span>
                         Atrás
                     </button>
 <div class="flex gap-4 w-full md:w-auto">
-<button class="flex-1 md:min-w-[160px] flex items-center justify-center gap-2 px-8 h-12 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all magnetic-button">
+<button type="button" class="flex-1 md:min-w-[160px] flex items-center justify-center gap-2 px-8 h-12 rounded-lg border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all magnetic-button">
                             Siguiente
                             <span class="material-symbols-outlined">arrow_forward</span>
 </button>
-<button class="flex-1 md:min-w-[160px] flex items-center justify-center gap-2 px-8 h-12 rounded-lg bg-primary text-white font-bold hover:shadow-[0_0_20px_rgba(37,106,244,0.4)] transition-all magnetic-button animate-glow">
+<button id="submitBtn" type="submit" class="flex-1 md:min-w-[160px] flex items-center justify-center gap-2 px-8 h-12 rounded-lg bg-primary text-white font-bold hover:shadow-[0_0_20px_rgba(37,106,244,0.4)] transition-all magnetic-button animate-glow">
                             Enviar
                             <span class="material-symbols-outlined">send</span>
 </button>
 </div>
 </div>
-</div>
+</form>
 <div class="flex flex-col md:flex-row items-center justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 mt-4 animate-fadeInUp">
 <div class="flex items-center gap-2 hover-lift">
 <span class="material-symbols-outlined animate-rotate">shield</span>
@@ -599,11 +733,91 @@
 </footer>
 
 <script>
+const appLoader = document.getElementById('appLoader');
+const loaderPct = document.getElementById('loaderPct');
+const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const contactForm = document.getElementById('contactForm');
+const submitBtn = document.getElementById('submitBtn');
+const selectedChallengesInput = document.getElementById('selectedChallenges');
+const pageTransition = document.getElementById('pageTransition');
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+
+if (!prefersReducedMotion && appLoader) {
+    let pct = 0;
+    const start = performance.now();
+    const tickLoader = (now) => {
+        const elapsed = now - start;
+        pct = Math.min(96, Math.floor((elapsed / 1100) * 96));
+        if (loaderPct) loaderPct.textContent = `${pct}%`;
+        if (pct < 96) requestAnimationFrame(tickLoader);
+    };
+    requestAnimationFrame(tickLoader);
+
+    window.addEventListener('load', () => {
+        if (loaderPct) loaderPct.textContent = '100%';
+        appLoader.classList.add('is-hidden');
+        window.setTimeout(() => {
+            appLoader.style.display = 'none';
+        }, 700);
+    });
+} else if (appLoader) {
+    appLoader.style.display = 'none';
+}
+
 // Efectos interactivos avanzados para el formulario
 document.addEventListener('DOMContentLoaded', function() {
     // Efecto de partículas interactivas
     const particles = document.querySelectorAll('.particle');
-    
+
+    const root = document.documentElement;
+    const setThemeUi = () => {
+        const isDark = root.classList.contains('dark');
+        if (themeIcon) themeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
+    };
+
+    const applyTheme = (theme) => {
+        const isDark = theme === 'dark';
+        root.classList.toggle('dark', isDark);
+        setThemeUi();
+    };
+
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || storedTheme === 'light') {
+        applyTheme(storedTheme);
+    } else {
+        applyTheme('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = root.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
+            showToast(next === 'dark' ? 'Modo oscuro activado' : 'Modo claro activado', 'success');
+        });
+    }
+
+    const showToast = (message, type = 'success') => {
+        const toast = document.createElement('div');
+        toast.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-xl animate-scaleIn ${type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`;
+        toast.innerHTML = `<span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : 'error'}</span> ${message}`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), prefersReducedMotion ? 1200 : 2400);
+    };
+
+    const setSelectedChallengesValue = () => {
+        if (!selectedChallengesInput) return;
+        const selected = Array.from(document.querySelectorAll('.group.card-active'))
+            .map((el) => {
+                const title = el.querySelector('p.text-lg');
+                return title ? title.textContent.trim() : '';
+            })
+            .filter(Boolean);
+        selectedChallengesInput.value = selected.join(', ');
+    };
+
     // Animación de scroll suave
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -622,7 +836,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
         const parallaxElements = document.querySelectorAll('.parallax-slow');
-        
+
         parallaxElements.forEach(element => {
             const speed = 0.5;
             element.style.transform = `translateY(${scrolled * speed}px)`;
@@ -633,20 +847,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const speed = 0.2 + (index * 0.1);
             particle.style.transform = `translateY(${scrolled * speed}px)`;
         });
-    });
+    }, { passive: true });
 
     // Efecto magnético en botones
     const magneticButtons = document.querySelectorAll('.magnetic-button');
-    
+
     magneticButtons.forEach(button => {
         button.addEventListener('mousemove', (e) => {
             const rect = button.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            
             button.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.05)`;
         });
-        
+
         button.addEventListener('mouseleave', () => {
             button.style.transform = 'translate(0, 0) scale(1)';
         });
@@ -677,12 +890,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Interactividad de las tarjetas de desafíos
     const challengeCards = document.querySelectorAll('.group');
-    
+
     challengeCards.forEach(card => {
         card.addEventListener('click', function() {
-            // Toggle selection
             const isSelected = this.classList.contains('card-active');
-            
+
             if (!isSelected) {
                 this.classList.add('card-active');
                 const checkIcon = this.querySelector('.material-symbols-outlined');
@@ -698,14 +910,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     checkIcon.classList.remove('text-primary', 'animate-pulse-slow');
                 }
             }
+
+            setSelectedChallengesValue();
         });
-        
-        // Efecto hover mejorado
+
         card.addEventListener('mouseenter', () => {
             card.style.transform = 'translateY(-8px) scale(1.02)';
             card.style.boxShadow = '0 25px 50px rgba(37, 106, 244, 0.4)';
         });
-        
+
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'translateY(0) scale(1)';
             card.style.boxShadow = '';
@@ -714,18 +927,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Validación y efectos del formulario
     const formInputs = document.querySelectorAll('.form-input');
-    const textarea = document.querySelector('textarea');
-    
+    const textarea = document.getElementById('objectives');
+
     formInputs.forEach(input => {
         input.addEventListener('focus', () => {
-            input.parentElement.classList.add('animate-glow');
+            input.parentElement?.classList.add('animate-glow');
         });
-        
+
         input.addEventListener('blur', () => {
-            input.parentElement.classList.remove('animate-glow');
+            input.parentElement?.classList.remove('animate-glow');
         });
-        
-        // Validación en tiempo real
+
         input.addEventListener('input', (e) => {
             if (e.target.value.length > 0) {
                 input.classList.remove('error-shake');
@@ -733,16 +945,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     if (textarea) {
         textarea.addEventListener('focus', () => {
-            textarea.parentElement.classList.add('animate-glow');
+            textarea.parentElement?.classList.add('animate-glow');
         });
-        
+
         textarea.addEventListener('blur', () => {
-            textarea.parentElement.classList.remove('animate-glow');
+            textarea.parentElement?.classList.remove('animate-glow');
         });
-        
+
         textarea.addEventListener('input', (e) => {
             if (e.target.value.length > 0) {
                 textarea.classList.remove('error-shake');
@@ -750,14 +962,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Efecto de escritura para el título
     const mainTitle = document.querySelector('.text-gradient.animate-gradient');
-    if (mainTitle) {
+    if (mainTitle && !prefersReducedMotion) {
         const text = mainTitle.textContent;
         mainTitle.textContent = '';
         let index = 0;
-        
+
         const typeWriter = () => {
             if (index < text.length) {
                 mainTitle.textContent += text.charAt(index);
@@ -765,138 +977,161 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(typeWriter, 100);
             }
         };
-        
-        setTimeout(typeWriter, 1000);
+
+        setTimeout(typeWriter, 900);
     }
-    
-    // Progreso del formulario
-    const progressBar = document.querySelector('.progress-bar');
-    const progressText = document.querySelector('.text-primary.text-sm.font-bold');
-    
-    let currentStep = 2;
-    const totalSteps = 4;
-    
-    function updateProgress() {
-        const percentage = (currentStep / totalSteps) * 100;
-        if (progressBar) {
-            progressBar.style.width = `${percentage}%`;
-        }
-        if (progressText) {
-            progressText.textContent = `${Math.round(percentage)}% Completado`;
-        }
-    }
-    
-    // Validación del formulario
-    const submitButton = document.querySelector('.animate-glow');
-    const nextButton = document.querySelectorAll('.magnetic-button')[1];
-    
-    if (submitButton) {
-        submitButton.addEventListener('click', (e) => {
+
+    // Envío real por correo (FormSubmit AJAX)
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Validar campos
-            const selectedChallenges = document.querySelectorAll('.card-active').length;
-            const industrySelect = document.querySelector('select');
-            const objectivesText = textarea?.value || '';
-            
-            let isValid = true;
-            
-            if (selectedChallenges === 0) {
-                isValid = false;
-                // Shake challenge cards
+
+            const name = document.getElementById('leadName')?.value?.trim() || '';
+            const email = document.getElementById('leadEmail')?.value?.trim() || '';
+            const industrySelect = document.getElementById('industry');
+            const objectivesEl = document.getElementById('objectives');
+            const objectivesText = objectivesEl ? objectivesEl.value.trim() : '';
+            const selectedChallengesCount = document.querySelectorAll('.group.card-active').length;
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+            if (!name || name.length < 2 || !emailOk || !industrySelect?.value || selectedChallengesCount === 0 || objectivesText.length < 10) {
+                showToast('Completa los campos obligatorios', 'error');
+
+                if (selectedChallengesCount === 0) {
+                    challengeCards.forEach(card => {
+                        if (!card.classList.contains('card-active')) {
+                            card.classList.add('error-shake');
+                            setTimeout(() => card.classList.remove('error-shake'), 500);
+                        }
+                    });
+                }
+
+                if (!industrySelect?.value) {
+                    industrySelect?.classList.add('error-shake');
+                    setTimeout(() => industrySelect?.classList.remove('error-shake'), 500);
+                }
+
+                if (objectivesEl && objectivesText.length < 10) {
+                    objectivesEl.classList.add('error-shake');
+                    setTimeout(() => objectivesEl.classList.remove('error-shake'), 500);
+                }
+
+                return;
+            }
+
+            setSelectedChallengesValue();
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="material-symbols-outlined">hourglass_empty</span> Enviando...';
+            }
+
+            try {
+                const endpoint = 'https://formsubmit.co/ajax/coronahernandezs981@gmail.com';
+                const fd = new FormData(contactForm);
+
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: fd
+                });
+
+                if (!res.ok) throw new Error('Request failed');
+
+                showToast('Enviado a tu correo', 'success');
+                contactForm.reset();
+
                 challengeCards.forEach(card => {
-                    if (!card.classList.contains('card-active')) {
-                        card.classList.add('error-shake');
-                        setTimeout(() => card.classList.remove('error-shake'), 500);
+                    card.classList.remove('card-active');
+                    const checkIcon = card.querySelector('.material-symbols-outlined');
+                    if (checkIcon && checkIcon.textContent === 'check_circle') {
+                        checkIcon.textContent = 'circle';
+                        checkIcon.classList.remove('text-primary', 'animate-pulse-slow');
                     }
                 });
-            }
-            
-            if (!industrySelect.value) {
-                isValid = false;
-                industrySelect.classList.add('error-shake');
-                setTimeout(() => industrySelect.classList.remove('error-shake'), 500);
-            }
-            
-            if (objectivesText.length < 10) {
-                isValid = false;
-                if (textarea) {
-                    textarea.classList.add('error-shake');
-                    setTimeout(() => textarea.classList.remove('error-shake'), 500);
-                }
-            }
-            
-            if (isValid) {
-                // Animación de éxito
-                submitButton.innerHTML = '<span class="material-symbols-outlined animate-success-check">check_circle</span> Enviado!';
-                submitButton.classList.remove('animate-glow');
-                submitButton.classList.add('bg-green-500');
-                submitButton.disabled = true;
-                
-                // Mostrar mensaje de éxito
-                setTimeout(() => {
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl animate-scaleIn';
-                    successMessage.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Formulario enviado con éxito';
-                    document.body.appendChild(successMessage);
-                    
+
+                setSelectedChallengesValue();
+
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Enviado';
+                    submitBtn.classList.add('bg-green-500');
                     setTimeout(() => {
-                        successMessage.remove();
-                        // Resetear formulario
-                        submitButton.innerHTML = '<span class="material-symbols-outlined">send</span> Enviar';
-                        submitButton.classList.add('animate-glow');
-                        submitButton.classList.remove('bg-green-500');
-                        submitButton.disabled = false;
-                        
-                        challengeCards.forEach(card => {
-                            card.classList.remove('card-active');
-                            const checkIcon = card.querySelector('.material-symbols-outlined');
-                            if (checkIcon && checkIcon.textContent === 'check_circle') {
-                                checkIcon.textContent = 'circle';
-                                checkIcon.classList.remove('text-primary', 'animate-pulse-slow');
-                            }
-                        });
-                        
-                        industrySelect.value = '';
-                        if (textarea) textarea.value = '';
-                    }, 3000);
-                }, 500);
+                        submitBtn.classList.remove('bg-green-500');
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = 'Enviar <span class="material-symbols-outlined">send</span>';
+                    }, prefersReducedMotion ? 900 : 1800);
+                }
+            } catch (err) {
+                showToast('Error al enviar, intenta de nuevo', 'error');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Enviar <span class="material-symbols-outlined">send</span>';
+                }
             }
         });
     }
-    
+
     // Efecto hover en badges de seguridad
     const securityBadges = document.querySelectorAll('.hover-lift');
-    
+
     securityBadges.forEach(badge => {
         badge.addEventListener('mouseenter', () => {
             badge.style.transform = 'translateY(-3px) scale(1.1)';
             badge.style.opacity = '1';
         });
-        
+
         badge.addEventListener('mouseleave', () => {
             badge.style.transform = 'translateY(0) scale(1)';
             badge.style.opacity = '0.5';
         });
     });
-    
+
     // Efecto de guardado del borrador
     const saveDraftButton = document.querySelector('.sticky button');
-    
+
     if (saveDraftButton) {
         saveDraftButton.addEventListener('click', () => {
             saveDraftButton.innerHTML = '<span class="material-symbols-outlined">save</span> Guardado!';
             saveDraftButton.classList.add('bg-green-500');
-            
+
             setTimeout(() => {
                 saveDraftButton.innerHTML = '<span class="material-symbols-outlined">save</span> Guardar Borrador';
                 saveDraftButton.classList.remove('bg-green-500');
             }, 2000);
         });
     }
-    
+
     console.log('🚀 Formulario IA - Interacciones cargadas exitosamente');
 });
+
+(() => {
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const navigateTo = (url) => {
+        if (!pageTransition || prefersReducedMotion) {
+            window.location.href = url;
+            return;
+        }
+        pageTransition.classList.add('is-active');
+        window.setTimeout(() => {
+            window.location.href = url;
+        }, 220);
+    };
+
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        if (!href.toLowerCase().endsWith('.html')) return;
+        if (link.target && link.target !== '_self') return;
+        e.preventDefault();
+        navigateTo(href);
+    });
+
+    window.addEventListener('pageshow', () => {
+        if (pageTransition) pageTransition.classList.remove('is-active');
+    });
+})();
 </script>
 
 </body></html>
