@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat IA | Agencia IA</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#256af4",
+            "background-light": "#f5f6f8",
+            "background-dark": "#101622",
+          },
+          fontFamily: {
+            display: ["Space Grotesk", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    body { font-family: 'Space Grotesk', sans-serif; }
+    .glass { background: rgba(24, 34, 52, 0.55); backdrop-filter: blur(14px); border: 1px solid rgba(49, 67, 104, 0.55); }
+    html:not(.dark) .glass { background: rgba(255, 255, 255, 0.82); border-color: rgba(15, 23, 42, 0.12); }
+    .chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); }
+    html:not(.dark) .chip { background: rgba(15,23,42,0.04); border-color: rgba(15,23,42,0.10); }
+    .msg-user { background: rgba(37, 106, 244, 0.16); border: 1px solid rgba(37, 106, 244, 0.35); }
+    .msg-ai { background: rgba(0, 242, 255, 0.10); border: 1px solid rgba(0, 242, 255, 0.25); }
+    html:not(.dark) .msg-user { background: rgba(37,106,244,0.10); border-color: rgba(37,106,244,0.22); }
+    html:not(.dark) .msg-ai { background: rgba(2,132,199,0.08); border-color: rgba(2,132,199,0.18); }
+    .scrollbar::-webkit-scrollbar { width: 10px; }
+    .scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 9999px; border: 2px solid rgba(0,0,0,0); background-clip: padding-box; }
+    html:not(.dark) .scrollbar::-webkit-scrollbar-thumb { background: rgba(15,23,42,0.14); }
+  </style>
+</head>
+<body class="bg-background-dark text-white min-h-screen">
+  <div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-30 border-b border-white/10 bg-background-dark/70 backdrop-blur">
+      <div class="max-w-5xl mx-auto px-5 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-primary/15 border border-primary/30 text-primary flex items-center justify-center">
+            <span class="material-symbols-outlined">auto_awesome</span>
+          </div>
+          <div class="flex flex-col leading-tight">
+            <p class="font-black tracking-tight">Chat IA</p>
+            <p class="text-xs font-bold uppercase tracking-widest text-white/60">Gemini</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="themeToggle" type="button" class="w-11 h-11 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all" aria-label="Cambiar tema">
+            <span id="themeIcon" class="material-symbols-outlined">dark_mode</span>
+          </button>
+          <a href="index.html" class="inline-flex items-center gap-2 px-4 h-11 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 font-bold text-sm transition-all">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+            Volver
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <div class="max-w-5xl mx-auto px-5 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <section class="lg:col-span-2 glass rounded-3xl overflow-hidden">
+          <div class="px-5 py-4 border-b border-white/10 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-primary">chat</span>
+              <div class="flex flex-col">
+                <p class="font-extrabold">Asistente</p>
+                <p id="statusLine" class="text-xs font-bold uppercase tracking-widest text-white/60">Listo</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="clearBtn" type="button" class="inline-flex items-center gap-2 px-4 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-bold text-xs uppercase tracking-widest">
+                <span class="material-symbols-outlined text-base">delete</span>
+                Limpiar
+              </button>
+            </div>
+          </div>
+
+          <div id="messages" class="h-[62vh] lg:h-[66vh] overflow-auto px-5 py-5 space-y-4 scrollbar" aria-live="polite"></div>
+
+          <div class="border-t border-white/10 p-4">
+            <form id="chatForm" class="flex items-end gap-3">
+              <div class="flex-1">
+                <label for="chatInput" class="sr-only">Escribe tu mensaje</label>
+                <textarea id="chatInput" rows="1" class="w-full resize-none rounded-2xl bg-white/5 border border-white/10 px-4 py-3 text-sm font-medium text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-cyan-300/70" placeholder="Escribe aquí... (Enter para enviar, Shift+Enter para salto)" required></textarea>
+              </div>
+              <button id="sendBtn" type="submit" class="h-11 px-5 rounded-2xl bg-primary hover:bg-primary/90 font-black transition-all shadow-lg shadow-primary/25 inline-flex items-center gap-2">
+                <span class="material-symbols-outlined">send</span>
+                Enviar
+              </button>
+            </form>
+            <p class="mt-2 text-xs text-white/50 font-bold uppercase tracking-widest">Tu API key vive en el servidor (PHP). El navegador nunca la ve.</p>
+          </div>
+        </section>
+
+        <aside class="glass rounded-3xl p-5 space-y-5">
+          <div class="space-y-2">
+            <p class="text-sm font-black tracking-tight">Atajos</p>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" class="chip px-3 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all" data-prompt="¿Qué servicios ofrece la agencia?">Servicios</button>
+              <button type="button" class="chip px-3 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all" data-prompt="Dame una propuesta rápida para un bot de WhatsApp para mi negocio.">WhatsApp</button>
+              <button type="button" class="chip px-3 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all" data-prompt="¿Cómo automatizo seguimiento de leads con CRM?">Leads</button>
+              <button type="button" class="chip px-3 py-2 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-white/10 transition-all" data-prompt="Hazme 5 ideas de contenido para redes sobre IA aplicada a empresas.">Contenido</button>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-sm font-black tracking-tight">Sugerencias</p>
+            <div class="space-y-2 text-sm text-white/70">
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p class="font-bold">Mejor prompt</p>
+                <p class="text-xs text-white/60 mt-1">Di tu industria, canal (web/WhatsApp), objetivo y volumen.</p>
+              </div>
+              <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p class="font-bold">Privacidad</p>
+                <p class="text-xs text-white/60 mt-1">No pegues contraseñas ni datos sensibles de clientes.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <p class="text-sm font-black tracking-tight">Conexión</p>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+              <p class="text-xs font-bold uppercase tracking-widest text-white/60">Endpoint</p>
+              <p class="text-sm font-black mt-1">/api/gemini.php</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="border-t border-white/10 py-6">
+      <div class="max-w-5xl mx-auto px-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <p class="text-xs font-bold uppercase tracking-widest text-white/50">Agencia IA</p>
+        <p class="text-xs font-bold uppercase tracking-widest text-white/40">Backend PHP compatible con hosting</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function applyTheme(isDark) {
+      if (isDark) {
+        root.classList.add('dark');
+        themeIcon.textContent = 'dark_mode';
+      } else {
+        root.classList.remove('dark');
+        themeIcon.textContent = 'light_mode';
+      }
+      try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (_) {}
+    }
+
+    (function initTheme() {
+      let saved = null;
+      try { saved = localStorage.getItem('theme'); } catch (_) {}
+      if (saved === 'light') applyTheme(false);
+      else applyTheme(true);
+    })();
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = root.classList.contains('dark');
+      applyTheme(!isDark);
+    });
+
+    const messagesEl = document.getElementById('messages');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const statusLine = document.getElementById('statusLine');
+
+    function scrollToBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function setStatus(text) {
+      statusLine.textContent = text;
+    }
+
+    function createBubble({ role, text }) {
+      const wrap = document.createElement('div');
+      wrap.className = role === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+      const bubble = document.createElement('div');
+      bubble.className = (role === 'user' ? 'msg-user' : 'msg-ai') + ' max-w-[92%] rounded-2xl px-4 py-3';
+
+      const header = document.createElement('div');
+      header.className = 'flex items-center gap-2 mb-1';
+
+      const icon = document.createElement('span');
+      icon.className = 'material-symbols-outlined text-base ' + (role === 'user' ? 'text-primary' : 'text-cyan-300');
+      icon.textContent = role === 'user' ? 'person' : 'smart_toy';
+
+      const label = document.createElement('p');
+      label.className = 'text-[11px] font-black uppercase tracking-widest ' + (role === 'user' ? 'text-white/70' : 'text-white/60');
+      label.textContent = role === 'user' ? 'Tú' : 'Asistente';
+
+      const body = document.createElement('div');
+      body.className = 'text-sm font-medium leading-relaxed whitespace-pre-wrap';
+      body.textContent = text;
+
+      header.appendChild(icon);
+      header.appendChild(label);
+      bubble.appendChild(header);
+      bubble.appendChild(body);
+      wrap.appendChild(bubble);
+
+      return { wrap, body };
+    }
+
+    function addMessage(role, text) {
+      const node = createBubble({ role, text });
+      messagesEl.appendChild(node.wrap);
+      scrollToBottom();
+      return node;
+    }
+
+    function setLoading(loading) {
+      chatInput.disabled = loading;
+      sendBtn.disabled = loading;
+      if (loading) {
+        sendBtn.classList.add('opacity-70');
+        setStatus('Pensando…');
+      } else {
+        sendBtn.classList.remove('opacity-70');
+        setStatus('Listo');
+      }
+    }
+
+    function autosize() {
+      chatInput.style.height = 'auto';
+      chatInput.style.height = Math.min(chatInput.scrollHeight, 180) + 'px';
+    }
+
+    chatInput.addEventListener('input', autosize);
+
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.requestSubmit();
+      }
+    });
+
+    function resetChat() {
+      messagesEl.innerHTML = '';
+      addMessage('ai', 'Hola, soy tu asistente IA. Dime qué necesitas y te ayudo a armar una solución.');
+    }
+
+    clearBtn.addEventListener('click', () => {
+      resetChat();
+      chatInput.value = '';
+      autosize();
+      chatInput.focus();
+    });
+
+    document.querySelectorAll('[data-prompt]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const prompt = btn.getAttribute('data-prompt') || '';
+        chatInput.value = prompt;
+        autosize();
+        chatInput.focus();
+      });
+    });
+
+    async function callBackend(message) {
+      const res = await fetch('api/gemini.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || data.ok !== true) {
+        const msg = data && data.message ? data.message : 'Error inesperado.';
+        const details = data && data.error ? ' (' + data.error + ')' : '';
+        throw new Error(msg + details);
+      }
+      return data.reply;
+    }
+
+    chatForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = (chatInput.value || '').trim();
+      if (!message) return;
+
+      addMessage('user', message);
+      chatInput.value = '';
+      autosize();
+      setLoading(true);
+
+      const placeholder = addMessage('ai', '');
+      placeholder.body.textContent = '...';
+
+      try {
+        const reply = await callBackend(message);
+        placeholder.body.textContent = reply;
+      } catch (err) {
+        placeholder.body.textContent = err instanceof Error ? err.message : 'Error inesperado.';
+      } finally {
+        setLoading(false);
+        chatInput.focus();
+      }
+    });
+
+    resetChat();
+    autosize();
+  </script>
+</body>
+</html>
