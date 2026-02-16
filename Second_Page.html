@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="es"><head>
+<html lang="es"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Catálogo de Soluciones IA | AI Nexus Agency</title>
@@ -30,9 +30,14 @@
         }
     </script>
 <style type="text/tailwindcss">
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Space Grotesk', sans-serif;
         }
+
         .glass-header {
             background: rgba(16, 22, 34, 0.8);
             backdrop-filter: blur(12px);
@@ -274,9 +279,117 @@
         .card-hover-3d:hover {
             transform: perspective(1000px) rotateY(5deg) rotateX(-5deg);
         }
+
+        #appLoader {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 40%, rgba(37, 106, 244, 0.16), transparent 45%),
+                rgba(16, 22, 34, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            opacity: 1;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        #appLoader.is-hidden {
+            opacity: 0;
+            transform: scale(1.02);
+            pointer-events: none;
+        }
+
+        #appLoaderCard {
+            width: min(560px, 100%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(24, 34, 52, 0.48);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+            padding: 28px;
+        }
+
+        #loaderRing {
+            width: 110px;
+            height: 110px;
+            border-radius: 9999px;
+            border: 2px solid rgba(255, 255, 255, 0.10);
+            border-top-color: rgba(0, 242, 255, 0.9);
+            border-right-color: rgba(37, 106, 244, 0.9);
+            animation: rotate 1.2s linear infinite;
+            box-shadow: 0 0 26px rgba(37, 106, 244, 0.25);
+        }
+
+        #loaderBarOuter {
+            width: 100%;
+            height: 10px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        #loaderBar {
+            height: 100%;
+            width: 40%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, rgba(37, 106, 244, 1), rgba(0, 242, 255, 1));
+            background-size: 200% 100%;
+            animation: shimmer 1.2s linear infinite;
+        }
+
+        #pageTransition {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.45s ease, transform 0.45s ease;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 242, 255, 0.10), transparent 45%),
+                radial-gradient(circle at 80% 40%, rgba(37, 106, 244, 0.16), transparent 45%),
+                rgba(16, 22, 34, 0.88);
+            backdrop-filter: blur(8px);
+        }
+
+        #pageTransition.is-active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            #appLoader { display: none; }
+            #pageTransition { display: none; }
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div id="appLoader" aria-hidden="true">
+<div id="appLoaderCard" class="glass-morphism">
+<div class="flex items-center justify-between gap-6 mb-6">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">query_stats</span>
+</div>
+<div class="flex flex-col">
+<p class="text-white text-lg font-bold leading-none">AI Nexus</p>
+<p class="text-white/60 text-xs font-bold uppercase tracking-widest">Cargando Catálogo</p>
+</div>
+</div>
+<div id="loaderRing" aria-hidden="true"></div>
+</div>
+<p class="text-white/80 text-sm leading-relaxed mb-6">Preparando tarjetas, filtros y animaciones.</p>
+<div id="loaderBarOuter" aria-hidden="true"><div id="loaderBar"></div></div>
+<div class="flex items-center justify-between mt-4">
+<p class="text-white/50 text-xs">Experiencia interactiva</p>
+<p id="loaderPct" class="text-cyan-300 text-xs font-bold">0%</p>
+</div>
+</div>
+</div>
+<div id="pageTransition" aria-hidden="true"></div>
 <header class="sticky top-0 z-50 glass-header border-b border-slate-200 dark:border-slate-800">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <div class="flex items-center justify-between h-16">
@@ -296,6 +409,9 @@
 </nav>
 </div>
 <div class="flex items-center gap-4">
+<button id="themeToggle" class="hidden sm:inline-flex items-center justify-center w-10 h-10 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:text-primary hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" type="button" aria-label="Cambiar tema">
+<span id="themeIcon" class="material-symbols-outlined text-xl">dark_mode</span>
+</button>
 <div class="relative hidden sm:block">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
 <input class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-primary w-64 text-slate-900 dark:text-white placeholder:text-slate-500" placeholder="Buscar herramientas IA..." type="text"/>
@@ -403,6 +519,32 @@
 </footer>
 
 <script>
+const appLoader = document.getElementById('appLoader');
+const loaderPct = document.getElementById('loaderPct');
+const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!prefersReducedMotion && appLoader) {
+    let pct = 0;
+    const start = performance.now();
+    const tickLoader = (now) => {
+        const elapsed = now - start;
+        pct = Math.min(96, Math.floor((elapsed / 1100) * 96));
+        if (loaderPct) loaderPct.textContent = `${pct}%`;
+        if (pct < 96) requestAnimationFrame(tickLoader);
+    };
+    requestAnimationFrame(tickLoader);
+
+    window.addEventListener('load', () => {
+        if (loaderPct) loaderPct.textContent = '100%';
+        appLoader.classList.add('is-hidden');
+        window.setTimeout(() => {
+            appLoader.style.display = 'none';
+        }, 700);
+    });
+} else if (appLoader) {
+    appLoader.style.display = 'none';
+}
+
 // Efectos interactivos avanzados para el catálogo
 document.addEventListener('DOMContentLoaded', function() {
     // Efecto de partículas interactivas
@@ -586,8 +728,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(' AI Nexus Catalog - Interacciones cargadas exitosamente');
 });
 </script>
-
-</body></html>
 
 <!-- Sección de Comparación de Servicios -->
 <section class="py-20 bg-slate-50 dark:bg-background-dark relative overflow-hidden">
@@ -789,7 +929,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <!-- Caso 3 -->
             <div class="glass-morphism rounded-2xl p-8 hover-lift card-hover-3d animate-fadeInUp animate-delay-600">
-                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center mb-6 animate-pulse-slow">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center mb-6 animate-pulse-slow">
                     <span class="material-symbols-outlined text-white text-2xl">medical_services</span>
                 </div>
                 <h3 class="text-2xl font-bold mb-3">Salud y Farmacia</h3>
@@ -885,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="text-sm font-medium">+35% alcance</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <span class="material-sounds-outlined text-primary text-lg">analytics</span>
+                        <span class="material-symbols-outlined text-primary text-lg">healing</span>
                         <span class="text-sm font-medium">+25% CTR</span>
                     </div>
                 </div>
@@ -1272,7 +1412,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 notification.style.opacity = '0';
                 notification.style.transform = 'translateX(100%)';
                 setTimeout(() => notification.remove(), 300);
-            }, 3000);
+            }, 2600);
         }
 
         // Efecto de onda en click para todos los botones
@@ -1399,6 +1539,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('🚀 AI Nexus Catalog - Interacciones avanzadas cargadas exitosamente');
     });
+</script>
+
+<script>
+(() => {
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const pageTransition = document.getElementById('pageTransition');
+
+    const notify = (message, type = 'info') => {
+        if (typeof window.showNotification === 'function') {
+            window.showNotification(message, type);
+            return;
+        }
+
+        const n = document.createElement('div');
+        n.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-xl animate-scaleIn z-50 ${type === 'success' ? 'bg-green-500 text-white' : type === 'error' ? 'bg-red-500 text-white' : 'bg-primary text-white'}`;
+        n.innerHTML = `<div class="flex items-center gap-2"><span class="material-symbols-outlined">${type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info'}</span><span>${message}</span></div>`;
+        document.body.appendChild(n);
+        setTimeout(() => {
+            n.style.opacity = '0';
+            n.style.transform = 'translateX(100%)';
+            setTimeout(() => n.remove(), 300);
+        }, 2600);
+    };
+
+    const setThemeUi = () => {
+        const isDark = root.classList.contains('dark');
+        if (themeIcon) themeIcon.textContent = isDark ? 'dark_mode' : 'light_mode';
+    };
+
+    const applyTheme = (theme) => {
+        const isDark = theme === 'dark';
+        root.classList.toggle('dark', isDark);
+        setThemeUi();
+    };
+
+    const stored = localStorage.getItem('theme');
+    if (stored === 'dark' || stored === 'light') {
+        applyTheme(stored);
+    } else {
+        applyTheme('dark');
+        localStorage.setItem('theme', 'dark');
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = root.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
+            notify(next === 'dark' ? 'Modo oscuro activado' : 'Modo claro activado', 'success');
+        });
+    }
+
+    const navigateTo = (url) => {
+        if (!pageTransition || prefersReducedMotion) {
+            window.location.href = url;
+            return;
+        }
+
+        pageTransition.classList.add('is-active');
+        window.setTimeout(() => {
+            window.location.href = url;
+        }, 220);
+    };
+
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href]');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+        if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+        if (!href.toLowerCase().endsWith('.html')) return;
+        if (link.target && link.target !== '_self') return;
+        e.preventDefault();
+        navigateTo(href);
+    });
+
+    window.addEventListener('pageshow', () => {
+        if (pageTransition) pageTransition.classList.remove('is-active');
+    });
+})();
 </script>
 
 </body></html>

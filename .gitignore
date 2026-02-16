@@ -1,0 +1,36 @@
+# API Keys y configuración sensible
+api/config.local.php
+api/config.local.*
+
+# Logs y archivos temporales
+logs/
+*.log
+tmp/
+temp/
+
+# Archivos de backup
+*.bak
+*.bak-*
+
+# Archivos de entorno
+.env
+.env.*
+!.env.example
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/
+
+# Node modules (si lo usas)
+node_modules/
+
+# Dependencias PHP (si usas Composer)
+vendor/
+
+# Cache
+.cache/
+*.cache
